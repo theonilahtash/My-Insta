@@ -11,6 +11,8 @@ class Image(models.Model):
     likes = models.PositiveIntegerField()
     comments = models.CharField(max_length=60)
     profile_image = models.ImageField(upload_to='profiles/',blank=True)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
 
 
     def __str__(self):
