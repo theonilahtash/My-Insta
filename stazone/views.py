@@ -22,4 +22,4 @@ def search_results(request):
 
     else:
         message = "Nothing searched"
-        return render(request,'all-insta/search.html',{"message":message})
+        return render(request,'all-stazone/search.html',{"message":message})
