@@ -1,4 +1,5 @@
 from django.db import models
+import datetime as dt
 
 # Create your models here.
 
@@ -17,6 +18,13 @@ class Image(models.Model):
 
     def __str__(self):
         return self.caption
+
+
+    @classmethod
+    def stazone_today(cls):
+        stazone = cls.objects.filter(pub_date__date = today)
+        return stazone
+
 
 class Profile(models.Model):
     bio =models.TextField(max_length=60)
