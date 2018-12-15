@@ -15,3 +15,7 @@ class Image(models.Model):
 
     def __str__(self):
         return self.caption
+
+class Profile(models.Model):
+    bio =models.TextField(max_length=60)
+    profile_pic = models.ImageField(upload_to='profile/')
