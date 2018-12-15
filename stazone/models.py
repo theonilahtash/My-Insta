@@ -25,6 +25,11 @@ class Image(models.Model):
         stazone = cls.objects.filter(pub_date__date = today)
         return stazone
 
+    @classmethod
+    def search_profile(cls,search_term):
+        profile = cls.objects.filter(username_icontains=query)
+        return profile
+
 
 class Profile(models.Model):
     bio =models.TextField(max_length=60)
