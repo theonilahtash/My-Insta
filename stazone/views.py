@@ -8,4 +8,6 @@ def welcome(request):
 
 
 def stazone_today(request):
-    return render(request,'all-stazone/today-stazone.html')
+    images = Image.objects.all()
+    print(images)
+    return render(request,'all-stazone/today-stazone.html',{"images":images})
