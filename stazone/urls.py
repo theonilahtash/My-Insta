@@ -5,8 +5,10 @@ from django.conf.urls.static import static
 
 urlpatterns=[
     url('^$',views.welcome,name = 'welcome'),
-        #  url('^today/$',views.images,name='welcome'),
+    # url('^today/$',views.images,name='welcome'),
     url(r'^search/', views.search_results, name='search_results')
+    url(r'^profile/(\d+)',views.profile,name='profile'),
+
 
 ]
 if settings.DEBUG:

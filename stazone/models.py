@@ -11,7 +11,7 @@ class Image(models.Model):
     # profile = models.ForeignKey(User,on_delete=models.CASCADE)
     likes = models.PositiveIntegerField()
     comments = models.CharField(max_length=60)
-    profile_image = models.ImageField(upload_to='profiles/',blank=True)
+    # profile_image = models.ImageField(upload_to='profiles/',blank=True)
     pub_date = models.DateTimeField(auto_now_add=True)
 
 
