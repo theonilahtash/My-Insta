@@ -23,3 +23,11 @@ def search_results(request):
     else:
         message = "Nothing searched"
         return render(request,'all-stazone/search.html',{"message":message})
+
+def profile(request,profile_id):
+    try:
+        profile = Profile.objects.get(id = profile_id)
+    except DoesNotExist:
+        raise Http404()
+        return render(request,"all-insta/profile.html", {"profile":profile})
+
