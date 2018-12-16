@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http  import HttpResponse,Http404,HttpResponseRedirect
-from .models import Image
+from .models import Image,StazoneLetterRecipients
 from .forms import StazoneLetterForm
 from .email import send_welcome_email
 
