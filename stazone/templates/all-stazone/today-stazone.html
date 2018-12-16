@@ -1,12 +1,4 @@
 {%extends 'all-stazone/base.html'%} {% block content %} {{ block.super}}
-<div class="container-fluid">
-
-    <form action="{%url 'search_results'%}" method="post">
-        {%csrf_token%} {% bootstrap_form letterForm layout='inline' %}
-        <input type="submit" value="Subscribe">
-    </form>
-
-</div>
 
 <div class="container">
 
@@ -23,6 +15,14 @@
     <!--Display stazone profile images -->
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <img src="{{stazone_item.profile_image.url}}" class="img-responsive" alt="Image">
+    </div>
+    <div class="container-fluid">
+    
+        <form action="{%url 'search_results'%}" method="post">
+            {%csrf_token%} {% bootstrap_form letterForm layout='inline' %}
+            <input type="submit" value="Subscribe">
+        </form>
+    
     </div>
 
     {% empty %}

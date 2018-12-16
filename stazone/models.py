@@ -34,3 +34,7 @@ class Image(models.Model):
 class Profile(models.Model):
     bio =models.TextField(max_length=60)
     profile_pic = models.ImageField(upload_to='profile/')
+
+class StazoneLetterRecipients(models.Model):
+    name = models.CharField(max_length = 40)
+    email = models.EmailField()
