@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http  import HttpResponse
 from .models import Image
+from .forms import StazoneLetterForm
 
 
 # Create your views here.
@@ -11,8 +12,14 @@ def welcome(request):
 
 
 def stazone_today(request):
-    
-    return render(request,'all-stazone/today-stazone.html')
+    if request.method == 'POST':
+        form = StazoneLetterForm(request.POST)
+        if form.is_valid():
+            print('valid')
+
+    else:
+        form = StazoneLetterForm()
+    return render(request,'all-stazone/today-stazone.html',{"letterForm":form})
 
 def search_results(request):
     if 'profile' in request.GET and request.GET["profile"]:
