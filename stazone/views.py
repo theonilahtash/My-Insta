@@ -38,7 +38,7 @@ def search_results(request):
         return render(request,'all-stazone/search.html',{"message":message,"profiles": searched_profiles})
 
     else:
-        message = "Nothing searched"
+        message = "searched"
         return render(request,'all-stazone/search.html',{"message":message})
 
 @login_required(login_url='/accounts/login/')

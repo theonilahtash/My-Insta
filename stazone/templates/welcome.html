@@ -1,12 +1,14 @@
 {% extends 'all-stazone/base.html' %} {{form.media}} {% block content %} {{ block.super }} {% load bootstrap4 %}
 
-<h1>Welcome to the Instagram Site</h1>
+<h1>Instagram Site</h1>
 <!-- Looping through stazone end   -->
+<div class="container-fluid" style="text-align: center; margin-top:600px; padding-right:1000px;padding-bottom: 1000px;padding-left: 50px;color:green">
 
 <form action="{%url 'welcome'%}" method="post">
     {%csrf_token%} {% bootstrap_form letterForm layout='inline' %}
     <input type="submit" value="Subscribe">
 </form>
+</div>
 
 
 {% endblock %}
