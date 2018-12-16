@@ -3,6 +3,7 @@ from django.http  import HttpResponse,Http404,HttpResponseRedirect
 from .models import Image,StazoneLetterRecipients
 from .forms import StazoneLetterForm
 from .email import send_welcome_email
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -39,7 +40,8 @@ def search_results(request):
     else:
         message = "Nothing searched"
         return render(request,'all-stazone/search.html',{"message":message})
-
+        
+@login_required(login_url='/accounts/login/')
 def profile(request,profile_id):
     try:
         profile = Profile.objects.get(id = profile_id)
