@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http  import HttpResponse,Http404,HttpResponseRedirect
 from .models import Image,StazoneLetterRecipients
-from .forms import StazoneLetterForm
+from .forms import NewImageForm,StazoneLetterForm
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 
@@ -40,7 +40,7 @@ def search_results(request):
     else:
         message = "Nothing searched"
         return render(request,'all-stazone/search.html',{"message":message})
-        
+
 @login_required(login_url='/accounts/login/')
 def profile(request,profile_id):
     try:
@@ -48,4 +48,19 @@ def profile(request,profile_id):
     except DoesNotExist:
         raise Http404()
         return render(request,"all-stazone/profile.html", {"profile":profile})
+
+@login_required(login_url='/accounts/login/')
+def new_image(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.user = current_user
+            image.save()
+        return redirect('welcome')
+
+    else:
+        form = NewImageForm()
+    return render(request, 'new_image.html', {"form": form})
 
