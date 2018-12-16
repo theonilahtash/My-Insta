@@ -1,16 +1,18 @@
 from django.shortcuts import render
 from django.http  import HttpResponse
+from .models import Image
 
 
 # Create your views here.
 def welcome(request):
-    return render(request, 'welcome.html')
+    images = Image.objects.all()
+    print(images)
+    return render(request, 'welcome.html',{"images":images})
 
 
 def stazone_today(request):
-    images = Image.objects.all()
-    print(images)
-    return render(request,'all-stazone/today-stazone.html',{"images":images})
+    
+    return render(request,'all-stazone/today-stazone.html')
 
 def search_results(request):
     if 'profile' in request.GET and request.GET["profile"]:
