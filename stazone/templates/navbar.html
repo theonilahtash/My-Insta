@@ -31,6 +31,7 @@
                 </form>
             </div>
             <!-- search form end -->
+            <!--The search form above-->
             <div class="col-sm-6 col-md-6">
                 {% if user.is_authenticated %}
                 <ul>
@@ -41,6 +42,9 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a href="{%url 'welcome'%}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{%url 'new_image'%}">Upload Image</a>
                             </li>
                             <li>
                                 <a href="/accounts/password/change">Change Password</a>
@@ -58,6 +62,7 @@
             
                 {% endif %}
             </div>
+
         </div>
     </nav>
 </body>
