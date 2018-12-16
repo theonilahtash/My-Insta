@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http  import HttpResponse,Http404,HttpResponseRedirect
 from .models import Image
 from .forms import StazoneLetterForm
+from .email import send_welcome_email
 
 
 # Create your views here.
@@ -13,6 +14,7 @@ def welcome(request):
             email = form.cleaned_data['email']
             recipient = StazoneLetterRecipients(name = name,email = email)
             recipient.save()
+            send_welcome_email(name,email)
             HttpResponseRedirect('welcome.html')
             print('valid')
 
