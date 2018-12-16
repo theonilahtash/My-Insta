@@ -6,12 +6,6 @@ from .forms import StazoneLetterForm
 
 # Create your views here.
 def welcome(request):
-    images = Image.objects.all()
-    print(images)
-    return render(request, 'welcome.html',{"images":images})
-
-
-def stazone_today(request):
     if request.method == 'POST':
         form = StazoneLetterForm(request.POST)
         if form.is_valid():
@@ -19,12 +13,18 @@ def stazone_today(request):
             email = form.cleaned_data['email']
             recipient = StazoneLetterRecipients(name = name,email = email)
             recipient.save()
-            HttpResponseRedirect('stazone_today')
+            HttpResponseRedirect('welcome.html')
             print('valid')
 
     else:
         form = StazoneLetterForm()
-    return render(request,'all-stazone/today-stazone.html',{"letterForm":form})
+    return render(request, 'welcome.html',{"letterForm":form})
+
+
+def stazone_today(request):
+    images = Image.objects.all()
+    print(images)
+    return render(request,'all-stazone/today-stazone.html',{"images":images})
 
 def search_results(request):
     if 'profile' in request.GET and request.GET["profile"]:
