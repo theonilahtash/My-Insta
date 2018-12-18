@@ -1,14 +1,45 @@
-{% extends 'all-stazone/base.html' %} {{form.media}} {% block content %} {{ block.super }} {% load bootstrap4 %}
+{% extends 'all-stazone/base.html' %} {% load bootstrap4 %} {% block content %} {{ block.super }} 
+<h1>Instagram App</h1>
 
-<h1>Instagram Site</h1>
 <!-- Looping through stazone end   -->
-<div class="container-fluid" style="text-align: center; margin-top:600px; padding-right:1000px;padding-bottom: 1000px;padding-left: 50px;color:green">
+<div class="container-fluid" >
 
+    <div class="row">
+    <div class="col-md-4">
+        <form action="{%url 'welcome'%}" method="post">
+            {%csrf_token%} {% bootstrap_form letterForm layout='inline' %}
+            <input type="submit" value="Subscribe">
+        </form>
+    </div>
+        <!-- Looping through stazone   -->
+        <div class="image" style="text-align: center">
+            {% for image_item in images %}
+
+            <!-- displaying stazone images -->
+            
+                <h2 class="text-center"> {{ image_item.name }} </h2>
+                <!--Display stazone profile images -->
+            <div class="col-md-6" style="text-align: center">
+                <img src="{{image_item.image.url}}" class="img-responsive" alt="Image" width="500" height="500" style="margin-bottom: 80px;">
+                <p>{{image_item.comments}}</p>
+            </div>
+
+            <p>{{comment.name}}</p>
+            <p>{{comment.user}}</p>
+            {% endfor %}
+            <div class="col-md-6"></div>
+        </div>
+    </div>
+<!-- Looping through stazone end  
+<div class="container-fluid" style="text-align: center; margin-top:60px; padding-right:1000px;padding-bottom: 1000px;padding-left: 50px;color:green">
+   
 <form action="{%url 'welcome'%}" method="post">
     {%csrf_token%} {% bootstrap_form letterForm layout='inline' %}
     <input type="submit" value="Subscribe">
 </form>
+
+</div> -->
+
+
 </div>
-
-
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http  import HttpResponse,Http404,HttpResponseRedirect
-from .models import Image,StazoneLetterRecipients
+from .models import Image,StazoneLetterRecipients,Comment
 from .forms import NewImageForm,StazoneLetterForm
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,10 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def welcome(request):
+    images = Image.objects.all()
+    print(images)
+    comments = Comment.objects.all()
+    print(comments)
     if request.method == 'POST':
         form = StazoneLetterForm(request.POST)
         if form.is_valid():
@@ -21,13 +25,12 @@ def welcome(request):
 
     else:
         form = StazoneLetterForm()
-    return render(request, 'welcome.html',{"letterForm":form})
+    return render(request, 'welcome.html',{"images":images,"comments":comments,"letterForm":form})
 
 
 def stazone_today(request):
-    images = Image.objects.all()
-    print(images)
-    return render(request,'all-stazone/today-stazone.html',{"images":images})
+    
+    return render(request,'all-stazone/today-stazone.html')
 
 def search_results(request):
     if 'profile' in request.GET and request.GET["profile"]:
@@ -43,20 +46,24 @@ def search_results(request):
 
 @login_required(login_url='/accounts/login/')
 def profile(request,profile_id):
+    profile = profile.objects.get(user=current_user)
     try:
         profile = Profile.objects.get(id = profile_id)
     except DoesNotExist:
         raise Http404()
-        return render(request,"all-stazone/profile.html", {"profile":profile})
+        return render(request,"all-stazone/profile.html", {"images":images, "profile":profile})
 
 @login_required(login_url='/accounts/login/')
 def new_image(request):
     current_user = request.user
+    # profile = profile.objects.get(user=current_user)
     if request.method == 'POST':
         form = NewImageForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
             image.user = current_user
+            # image.profile = profile
+            print(image)
             image.save()
         return redirect('welcome')
 
